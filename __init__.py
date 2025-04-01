@@ -12,8 +12,7 @@ app = Flask(__name__)
 def hello_world():
     return render_template('hello.html')
   
-if __name__ == "__main__":
-  app.run(debug=True)
+
 
 @app.route("/contact/")
 def MaPremiereAPI():
@@ -38,3 +37,6 @@ def mongraphique():
 @app.route('/histogramme/')
 def histogramme():
     return render_template('histogramme.html')
+
+if __name__ == "__main__":
+  app.run(debug=True)
