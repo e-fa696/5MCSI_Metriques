@@ -53,8 +53,11 @@ def commits_chart():
             minute_counts[minute] = minute_counts.get(minute, 0) + 1
 
     results = [{'minute': str(minute), 'count': count} for minute, count in sorted(minute_counts.items())]
+ 
     return jsonify(results=results)
+@app.route("/test/")
+def test():
+    return "Flask fonctionne"
 
-# ✅ DOIT ÊTRE EN DERNIER !
 if __name__ == "__main__":
     app.run(debug=True)
