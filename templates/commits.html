@@ -5,9 +5,9 @@
   <title>Commits GitHub</title>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 </head>
-<body style="font-family:sans-serif; padding:40px; background:#f4f4f4;">
+<body>
   <h2>Répartition des commits par minute</h2>
-  <div id="chart_div" style="width: 100%; height: 500px;"></div>
+  <div id="chart_div" style="width: 900px; height: 500px;"></div>
 
   <script>
     google.charts.load('current', { packages: ['corechart'] });
@@ -26,7 +26,7 @@
           });
 
           var options = {
-            title: 'Nombre de commits par minute',
+            title: 'Commits par minute',
             legend: { position: 'none' },
             hAxis: { title: 'Minute' },
             vAxis: { title: 'Commits' }
@@ -34,6 +34,9 @@
 
           var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
           chart.draw(dataTable, options);
+        })
+        .catch(error => {
+          console.error("Erreur lors du chargement des données :", error);
         });
     }
   </script>
