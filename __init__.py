@@ -38,6 +38,10 @@ def histogramme():
 @app.route("/contact/")
 def contact_form():
     return render_template("contact.html")
+      
+@app.route('/graph-commits/')
+def graph_commits():
+    return render_template("commits.html")
 
 if __name__ == "__main__":
   app.run(debug=True)
