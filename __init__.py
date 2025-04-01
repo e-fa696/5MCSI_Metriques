@@ -39,7 +39,6 @@ def graph_commits():
 
 @app.route('/commits/')
 def commits_chart():
-    # Données simulées (minute : nombre de commits)
     results = [
         {"minute": "12", "count": 2},
         {"minute": "15", "count": 1},
@@ -48,6 +47,5 @@ def commits_chart():
         {"minute": "42", "count": 1},
     ]
     return jsonify(results=results)
-
 if __name__ == "__main__":
     app.run(debug=True)
