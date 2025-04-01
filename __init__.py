@@ -45,3 +45,24 @@ def graph_commits():
 
 if __name__ == "__main__":
   app.run(debug=True)
+
+@app.route('/commits/')
+def commits_chart():
+    url = "https://api.github.com/repos/OpenRSI/5MCSI_Metriques/commits"
+    response = urlopen(url)
+    data = json.loads(response.read().decode('utf-8'))
+
+    # Récupère les minutes de chaque commit
+    minute_counts = {}
+
+    for commit in data:
+        date_str = commit.get('commit', {}).get('author', {}).get('date')
+        if date_str:
+            dt = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%SZ')
+            minute = dt.minute
+            minute_counts[minute] = minute_counts.get(minute, 0) + 1
+
+    # Transforme en tableau exploitable pour le graphique
+    results = [{'minute': str(minute), 'count': count} for minute, count in sorted(minute_counts.items())]
+    return jsonify(results=results)
+
