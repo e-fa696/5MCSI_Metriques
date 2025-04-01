@@ -39,13 +39,25 @@ def graph_commits():
 
 @app.route('/commits/')
 def commits_chart():
-    results = [
-        {"minute": "12", "count": 2},
-        {"minute": "15", "count": 1},
-        {"minute": "23", "count": 3},
-        {"minute": "30", "count": 2},
-        {"minute": "42", "count": 1},
-    ]
+    try:
+        url = "https://api.github.com/repos/OpenRSI/5MCSI_Metriques/commits"
+        response = urlopen(url)
+        data = json.loads(response.read().decode('utf-8'))
+
+        minute_counts = {}
+
+        for commit in data:
+            date_str = commit.get('commit', {}).get('author', {}).get('date')
+            if date_str:
+                dt = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%SZ')
+                minute = dt.minute
+                minute_counts[minute] = minute_counts.get(minute, 0) + 1
+
+        results = [{'minute': str(minute), 'count': count} for minute, count in sorted(minute_counts.items())]
+        return jsonify(results=results)
+
+    except Exception as e:
+        return jsonify(error=str(e)), 500
     return jsonify(results=results)
 if __name__ == "__main__":
     app.run(debug=True)
