@@ -38,4 +38,3 @@ def mongraphique():
 @app.route('/histogramme/')
 def histogramme():
     return render_template('histogramme.html')
-
