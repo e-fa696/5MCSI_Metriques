@@ -4,17 +4,13 @@ from flask import json
 from datetime import datetime
 from urllib.request import urlopen
 import sqlite3
-      #test    
-#test
-app = Flask(__name__)                                                                                                                  
-                                                                                                                                       
+
+app = Flask(__name__)
+
 @app.route('/')
 def hello_world():
     return render_template('hello.html')
-  
 
-
-      
 @app.route('/tawarano/')
 def meteo():
     response = urlopen('https://samples.openweathermap.org/data/2.5/forecast?lat=0&lon=0&appid=xxx')
@@ -38,13 +34,10 @@ def histogramme():
 @app.route("/contact/")
 def contact_form():
     return render_template("contact.html")
-      
+
 @app.route('/graph-commits/')
 def graph_commits():
     return render_template("commits.html")
-
-if __name__ == "__main__":
-  app.run(debug=True)
 
 @app.route('/commits/')
 def commits_chart():
@@ -52,7 +45,6 @@ def commits_chart():
     response = urlopen(url)
     data = json.loads(response.read().decode('utf-8'))
 
-    # Récupère les minutes de chaque commit
     minute_counts = {}
 
     for commit in data:
@@ -62,7 +54,9 @@ def commits_chart():
             minute = dt.minute
             minute_counts[minute] = minute_counts.get(minute, 0) + 1
 
-    # Transforme en tableau exploitable pour le graphique
     results = [{'minute': str(minute), 'count': count} for minute, count in sorted(minute_counts.items())]
     return jsonify(results=results)
 
+# 👇 ce bloc doit toujours être tout à la fin
+if __name__ == "__main__":
+    app.run(debug=True)
