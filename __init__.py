@@ -14,9 +14,6 @@ def hello_world():
   
 
 
-@app.route("/contact/")
-def contact_form():
-    return render_template("contact.html")
       
 @app.route('/tawarano/')
 def meteo():
