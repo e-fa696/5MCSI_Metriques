@@ -1,9 +1,7 @@
-from flask import Flask, render_template_string, render_template, jsonify
-from flask import render_template
-from flask import json
+from flask import Flask, render_template, jsonify
 from datetime import datetime
 from urllib.request import urlopen
-import sqlite3
+import json
 
 app = Flask(__name__)
 
@@ -23,21 +21,21 @@ def meteo():
         results.append({'Jour': dt_value, 'temp': temp_day_value})
     return jsonify(results=results)
 
-@app.route("/rapport/")
+@app.route('/rapport/')
 def mongraphique():
-    return render_template("graphique.html")
+    return render_template('graphique.html')
 
 @app.route('/histogramme/')
 def histogramme():
     return render_template('histogramme.html')
 
-@app.route("/contact/")
+@app.route('/contact/')
 def contact_form():
-    return render_template("contact.html")
+    return render_template('contact.html')
 
 @app.route('/graph-commits/')
 def graph_commits():
-    return render_template("commits.html")
+    return render_template('commits.html')
 
 @app.route('/commits/')
 def commits_chart():
@@ -57,6 +55,6 @@ def commits_chart():
     results = [{'minute': str(minute), 'count': count} for minute, count in sorted(minute_counts.items())]
     return jsonify(results=results)
 
-# 👇 ce bloc doit toujours être tout à la fin
+# ✅ DOIT ÊTRE EN DERNIER !
 if __name__ == "__main__":
     app.run(debug=True)
