@@ -2,61 +2,102 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Contact</title>
+  <title>Contact Garage</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #f2f2f2; 
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to bottom right, #1a1a1a, #2d2d2d);
+      color: #fff;
+      margin: 0;
+      padding: 0;
     }
-    .contact-form {
-      background: white;
-      padding: 30px;
+
+    .container {
+      max-width: 600px;
+      margin: 80px auto;
+      background: #111;
+      padding: 40px;
       border-radius: 15px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 500px;
+      box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
     }
+
     h2 {
       text-align: center;
-      margin-bottom: 20px;
-      color: #333;
+      margin-bottom: 30px;
+      color: #e60000;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
+
+    label {
+      display: block;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
     input, textarea {
       width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      margin-bottom: 20px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-    button {
-      background-color: #4CAF50;
-      color: white;
-      padding: 12px 20px;
+      padding: 12px;
+      margin-top: 8px;
       border: none;
       border-radius: 8px;
-      cursor: pointer;
-      width: 100%;
-      font-size: 16px;
+      background-color: #2a2a2a;
+      color: white;
+      font-size: 15px;
     }
+
+    input:focus, textarea:focus {
+      outline: none;
+      background-color: #3a3a3a;
+    }
+
+    button {
+      margin-top: 30px;
+      width: 100%;
+      padding: 15px;
+      background: #e60000;
+      border: none;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
     button:hover {
-      background-color: #45a049;
+      background: #cc0000;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      font-size: 14px;
+      color: #aaa;
     }
   </style>
 </head>
 <body>
-  <form class="contact-form">
-    <h2>Formulaire de Contact</h2>
-    <input type="text" placeholder="Prénom" required>
-    <input type="text" placeholder="Nom" required>
-    <textarea rows="5" placeholder="Votre message..." required></textarea>
-    <button type="submit">Envoyer</button>
-  </form>
+
+  <div class="container">
+    <h2>Contactez notre garage</h2>
+    <form>
+      <label for="prenom">Prénom</label>
+      <input type="text" id="prenom" placeholder="Votre prénom" required>
+
+      <label for="nom">Nom</label>
+      <input type="text" id="nom" placeholder="Votre nom" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" rows="5" placeholder="Votre message ici..." required></textarea>
+
+      <button type="submit">Envoyer la demande</button>
+    </form>
+  </div>
+
+  <div class="footer">
+    &copy; 2025 - Garage Métrique | Service & Performance
+  </div>
+
 </body>
 </html>
-
