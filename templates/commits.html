@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Commits GitHub</title>
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+</head>
+<body style="font-family:sans-serif; padding:40px; background:#f4f4f4;">
+  <h2>Répartition des commits par minute</h2>
+  <div id="chart_div" style="width: 100%; height: 500px;"></div>
+
+  <script>
+    google.charts.load('current', { packages: ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+      fetch('/commits/')
+        .then(response => response.json())
+        .then(data => {
+          var dataTable = new google.visualization.DataTable();
+          dataTable.addColumn('string', 'Minute');
+          dataTable.addColumn('number', 'Commits');
+
+          data.results.forEach(entry => {
+            dataTable.addRow([entry.minute + " min", entry.count]);
+          });
+
+          var options = {
+            title: 'Nombre de commits par minute',
+            legend: { position: 'none' },
+            hAxis: { title: 'Minute' },
+            vAxis: { title: 'Commits' }
+          };
+
+          var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+          chart.draw(dataTable, options);
+        });
+    }
+  </script>
+</body>
+</html>
